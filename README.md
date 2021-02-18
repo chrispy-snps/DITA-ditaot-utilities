@@ -44,6 +44,18 @@ In addition, a version-independent filesystem link is created at
 
 so that you can put `~/dita-ot` in your `$PATH` and always get the latest version.
 
+If you have DITA-OT plugins to be installed, add the following to your `~/.profile` file to specify the list of plugins to install (exact syntax is important so that the entries are linefeed-separated):
+
+```
+# DITA-OT plugins for the install_ditaot.sh script to install
+export DITAOT_PLUGINS_TO_INSTALL="\
+/path/to/com.my.plugin1
+/path/to/com.my.plugin2
+/path/to/com.my.plugin3"
+```
+
+When this variable is defined, the script creates filesystem links to them in the `~/dita-ot-<VERSION>/plugins` directory, then runs `dita install` to install them.
+
 ## Author
 
 My name is Chris Papademetrious. I'm a technical writer with [Synopsys Inc.](https://www.synopsys.com/), a semiconductor design and verification software company.
