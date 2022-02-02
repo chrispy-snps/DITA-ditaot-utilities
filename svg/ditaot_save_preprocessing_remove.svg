@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="terminal" baseProfile="full" viewBox="0 0 896 189" width="896" version="1.1">
+    <defs>
+        <termtosvg:template_settings xmlns:termtosvg="https://github.com/nbedos/termtosvg">
+            <termtosvg:screen_geometry columns="112" rows="11"/>
+            <termtosvg:animation type="css"/>
+        </termtosvg:template_settings>
+        <style type="text/css" id="generated-style"><![CDATA[#screen {
+                font-family: 'DejaVu Sans Mono', monospace;
+                font-style: normal;
+                font-size: 14px;
+            }
+
+        text {
+            dominant-baseline: text-before-edge;
+            white-space: pre;
+        }
+    
+            :root {
+                --animation-duration: 9428ms;
+            }
+
+            @keyframes roll {
+                0.000%{transform:translateY(0px)}
+9.451%{transform:translateY(-204px)}
+11.317%{transform:translateY(-408px)}
+12.930%{transform:translateY(-612px)}
+15.051%{transform:translateY(-816px)}
+16.653%{transform:translateY(-1020px)}
+18.689%{transform:translateY(-1224px)}
+24.215%{transform:translateY(-1428px)}
+29.561%{transform:translateY(-1632px)}
+32.096%{transform:translateY(-1836px)}
+35.331%{transform:translateY(-2040px)}
+40.040%{transform:translateY(-2244px)}
+47.539%{transform:translateY(-2448px)}
+49.173%{transform:translateY(-2652px)}
+50.265%{transform:translateY(-2856px)}
+52.556%{transform:translateY(-3060px)}
+54.168%{transform:translateY(-3264px)}
+55.028%{transform:translateY(-3468px)}
+55.950%{transform:translateY(-3672px)}
+56.979%{transform:translateY(-3876px)}
+66.992%{transform:translateY(-4080px)}
+69.007%{transform:translateY(-4284px)}
+69.050%{transform:translateY(-4488px)}
+89.393%{transform:translateY(-4692px)}
+100.000%{transform:translateY(-4692px)}
+            }
+
+            #screen_view {
+                animation-duration: 9428ms;
+                animation-iteration-count:infinite;
+                animation-name:roll;
+                animation-timing-function: steps(1,end);
+                animation-fill-mode: forwards;
+            }
+        ]]></style>
+        <style type="text/css" id="user-style">
+            /* The colors defined below are the default 16 colors used for rendering text of the terminal. Adjust
+               them as needed.
+               PowerShell colors based on https://en.wikipedia.org/wiki/ANSI_escape_code#Colors */
+            .foreground {fill: #cccccc;}
+            .background {fill: #0c0c0c;}
+            .color0 {fill: #0c0c0c;}
+            .color1 {fill: #c50f1f;}
+            .color2 {fill: #13a10e;}
+            .color3 {fill: #c19c00;}
+            .color4 {fill: #0037da;}
+            .color5 {fill: #881798;}
+            .color6 {fill: #3a96dd;}
+            .color7 {fill: #cccccc;}
+            .color8 {fill: #767676;}
+            .color9 {fill: #e74856;}
+            .color10 {fill: #16c60c;}
+            .color11 {fill: #f9f1a5;}
+            .color12 {fill: #3b78ff;}
+            .color13 {fill: #b4009e;}
+            .color14 {fill: #61d6d6;}
+            .color15 {fill: #f2f2f2;}
+        </style>
+    </defs>
+    <svg id="screen" width="896" height="187" viewBox="0 0 896 187" preserveAspectRatio="xMidYMin slice">
+    <rect class="background" height="100%" width="100%" x="0" y="0"/><defs><g id="g1"><text x="0" textLength="112" font-weight="bold" class="color10">chrispy@laptop</text><text x="112" textLength="8" class="foreground">:</text><text x="120" textLength="80" font-weight="bold" class="color12">~/testcase</text><text x="200" textLength="16" class="foreground">$ </text><text x="216" textLength="8" class="background"> </text></g><g id="g2"><text x="0" textLength="112" font-weight="bold" class="color10">chrispy@laptop</text><text x="112" textLength="8" class="foreground">:</text><text x="120" textLength="80" font-weight="bold" class="color12">~/testcase</text><text x="200" textLength="24" class="foreground">$ d</text><text x="224" textLength="8" class="background"> </text></g><g id="g3"><text x="0" textLength="112" font-weight="bold" class="color10">chrispy@laptop</text><text x="112" textLength="8" class="foreground">:</text><text x="120" textLength="80" font-weight="bold" class="color12">~/testcase</text><text x="200" textLength="32" class="foreground">$ di</text><text x="232" textLength="8" class="background"> </text></g><g id="g4"><text x="0" textLength="112" font-weight="bold" class="color10">chrispy@laptop</text><text x="112" textLength="8" class="foreground">:</text><text x="120" textLength="80" font-weight="bold" class="color12">~/testcase</text><text x="200" textLength="40" class="foreground">$ dit</text><text x="240" textLength="8" class="background"> </text></g><g id="g5"><text x="0" textLength="112" font-weight="bold" class="color10">chrispy@laptop</text><text x="112" textLength="8" class="foreground">:</text><text x="120" textLength="80" font-weight="bold" class="color12">~/testcase</text><text x="200" textLength="48" class="foreground">$ dita</text><text x="248" textLength="8" class="background"> </text></g><g id="g6"><text x="0" textLength="112" font-weight="bold" class="color10">chrispy@laptop</text><text x="112" textLength="8" class="foreground">:</text><text x="120" textLength="80" font-weight="bold" class="color12">~/testcase</text><text x="200" textLength="56" class="foreground">$ ditao</text><text x="256" textLength="8" class="background"> </text></g><g id="g7"><text x="0" textLength="112" font-weight="bold" class="color10">chrispy@laptop</text><text x="112" textLength="8" class="foreground">:</text><text x="120" textLength="80" font-weight="bold" class="color12">~/testcase</text><text x="200" textLength="64" class="foreground">$ ditaot</text><text x="264" textLength="8" class="background"> </text></g><g id="g8"><text x="0" textLength="112" font-weight="bold" class="color10">chrispy@laptop</text><text x="112" textLength="8" class="foreground">:</text><text x="120" textLength="80" font-weight="bold" class="color12">~/testcase</text><text x="200" textLength="72" class="foreground">$ ditaot_</text><text x="272" textLength="8" class="background"> </text></g><g id="g9"><text x="0" textLength="112" font-weight="bold" class="color10">chrispy@laptop</text><text x="112" textLength="8" class="foreground">:</text><text x="120" textLength="80" font-weight="bold" class="color12">~/testcase</text><text x="200" textLength="80" class="foreground">$ ditaot_s</text><text x="280" textLength="8" class="background"> </text></g><g id="g10"><text x="0" textLength="112" font-weight="bold" class="color10">chrispy@laptop</text><text x="112" textLength="8" class="foreground">:</text><text x="120" textLength="80" font-weight="bold" class="color12">~/testcase</text><text x="200" textLength="88" class="foreground">$ ditaot_sa</text><text x="288" textLength="8" class="background"> </text></g><g id="g11"><text x="0" textLength="112" font-weight="bold" class="color10">chrispy@laptop</text><text x="112" textLength="8" class="foreground">:</text><text x="120" textLength="80" font-weight="bold" class="color12">~/testcase</text><text x="200" textLength="96" class="foreground">$ ditaot_sav</text><text x="296" textLength="8" class="background"> </text></g><g id="g12"><text x="0" textLength="112" font-weight="bold" class="color10">chrispy@laptop</text><text x="112" textLength="8" class="foreground">:</text><text x="120" textLength="80" font-weight="bold" class="color12">~/testcase</text><text x="200" textLength="248" class="foreground">$ ditaot_save_preprocessing.pl </text><text x="448" textLength="8" class="background"> </text></g><g id="g13"><text x="0" textLength="112" font-weight="bold" class="color10">chrispy@laptop</text><text x="112" textLength="8" class="foreground">:</text><text x="120" textLength="80" font-weight="bold" class="color12">~/testcase</text><text x="200" textLength="256" class="foreground">$ ditaot_save_preprocessing.pl -</text><text x="456" textLength="8" class="background"> </text></g><g id="g14"><text x="0" textLength="112" font-weight="bold" class="color10">chrispy@laptop</text><text x="112" textLength="8" class="foreground">:</text><text x="120" textLength="80" font-weight="bold" class="color12">~/testcase</text><text x="200" textLength="264" class="foreground">$ ditaot_save_preprocessing.pl --</text><text x="464" textLength="8" class="background"> </text></g><g id="g15"><text x="0" textLength="112" font-weight="bold" class="color10">chrispy@laptop</text><text x="112" textLength="8" class="foreground">:</text><text x="120" textLength="80" font-weight="bold" class="color12">~/testcase</text><text x="200" textLength="272" class="foreground">$ ditaot_save_preprocessing.pl --r</text><text x="472" textLength="8" class="background"> </text></g><g id="g16"><text x="0" textLength="112" font-weight="bold" class="color10">chrispy@laptop</text><text x="112" textLength="8" class="foreground">:</text><text x="120" textLength="80" font-weight="bold" class="color12">~/testcase</text><text x="200" textLength="280" class="foreground">$ ditaot_save_preprocessing.pl --re</text><text x="480" textLength="8" class="background"> </text></g><g id="g17"><text x="0" textLength="112" font-weight="bold" class="color10">chrispy@laptop</text><text x="112" textLength="8" class="foreground">:</text><text x="120" textLength="80" font-weight="bold" class="color12">~/testcase</text><text x="200" textLength="288" class="foreground">$ ditaot_save_preprocessing.pl --rem</text><text x="488" textLength="8" class="background"> </text></g><g id="g18"><text x="0" textLength="112" font-weight="bold" class="color10">chrispy@laptop</text><text x="112" textLength="8" class="foreground">:</text><text x="120" textLength="80" font-weight="bold" class="color12">~/testcase</text><text x="200" textLength="296" class="foreground">$ ditaot_save_preprocessing.pl --remo</text><text x="496" textLength="8" class="background"> </text></g><g id="g19"><text x="0" textLength="112" font-weight="bold" class="color10">chrispy@laptop</text><text x="112" textLength="8" class="foreground">:</text><text x="120" textLength="80" font-weight="bold" class="color12">~/testcase</text><text x="200" textLength="304" class="foreground">$ ditaot_save_preprocessing.pl --remov</text><text x="504" textLength="8" class="background"> </text></g><g id="g20"><text x="0" textLength="112" font-weight="bold" class="color10">chrispy@laptop</text><text x="112" textLength="8" class="foreground">:</text><text x="120" textLength="80" font-weight="bold" class="color12">~/testcase</text><text x="200" textLength="312" class="foreground">$ ditaot_save_preprocessing.pl --remove</text><text x="512" textLength="8" class="background"> </text></g><g id="g21"><text x="0" textLength="112" font-weight="bold" class="color10">chrispy@laptop</text><text x="112" textLength="8" class="foreground">:</text><text x="120" textLength="80" font-weight="bold" class="color12">~/testcase</text><text x="200" textLength="312" class="foreground">$ ditaot_save_preprocessing.pl --remove</text></g><g id="g22"><text x="0" textLength="8" class="background"> </text></g><g id="g23"><text x="0" textLength="464" class="foreground">Using the DITA-OT installation at '/home/chrispy/dita-ot'.</text></g><g id="g24"><text x="0" textLength="640" class="foreground">Restored '/home/chrispy/dita-ot/plugins/org.dita.base/build_preprocess.xml.orig'</text></g><g id="g25"><text x="0" textLength="608" class="foreground">      to '/home/chrispy/dita-ot/plugins/org.dita.base/build_preprocess.xml'.</text></g><g id="g26"><text x="0" textLength="112" font-weight="bold" class="color10">chrispy@laptop</text><text x="112" textLength="8" class="foreground">:</text><text x="120" textLength="80" font-weight="bold" class="color12">~/testcase</text><text x="200" textLength="48" class="foreground">$ exit</text></g></defs><g id="screen_view"><g><rect x="216" y="0" width="8" height="17" class="foreground"/><use xlink:href="#g1" y="0"/></g><g><rect x="224" y="204" width="8" height="17" class="foreground"/><use xlink:href="#g2" y="204"/></g><g><rect x="232" y="408" width="8" height="17" class="foreground"/><use xlink:href="#g3" y="408"/></g><g><rect x="240" y="612" width="8" height="17" class="foreground"/><use xlink:href="#g4" y="612"/></g><g><rect x="248" y="816" width="8" height="17" class="foreground"/><use xlink:href="#g5" y="816"/></g><g><rect x="256" y="1020" width="8" height="17" class="foreground"/><use xlink:href="#g6" y="1020"/></g><g><rect x="264" y="1224" width="8" height="17" class="foreground"/><use xlink:href="#g7" y="1224"/></g><g><rect x="272" y="1428" width="8" height="17" class="foreground"/><use xlink:href="#g8" y="1428"/></g><g><rect x="280" y="1632" width="8" height="17" class="foreground"/><use xlink:href="#g9" y="1632"/></g><g><rect x="288" y="1836" width="8" height="17" class="foreground"/><use xlink:href="#g10" y="1836"/></g><g><rect x="296" y="2040" width="8" height="17" class="foreground"/><use xlink:href="#g11" y="2040"/></g><g><rect x="448" y="2244" width="8" height="17" class="foreground"/><use xlink:href="#g12" y="2244"/></g><g><rect x="456" y="2448" width="8" height="17" class="foreground"/><use xlink:href="#g13" y="2448"/></g><g><rect x="464" y="2652" width="8" height="17" class="foreground"/><use xlink:href="#g14" y="2652"/></g><g><rect x="472" y="2856" width="8" height="17" class="foreground"/><use xlink:href="#g15" y="2856"/></g><g><rect x="480" y="3060" width="8" height="17" class="foreground"/><use xlink:href="#g16" y="3060"/></g><g><rect x="488" y="3264" width="8" height="17" class="foreground"/><use xlink:href="#g17" y="3264"/></g><g><rect x="496" y="3468" width="8" height="17" class="foreground"/><use xlink:href="#g18" y="3468"/></g><g><rect x="504" y="3672" width="8" height="17" class="foreground"/><use xlink:href="#g19" y="3672"/></g><g><rect x="512" y="3876" width="8" height="17" class="foreground"/><use xlink:href="#g20" y="3876"/></g><g><use xlink:href="#g21" y="4080"/><rect x="0" y="4097" width="8" height="17" class="foreground"/><use xlink:href="#g22" y="4097"/></g><g><use xlink:href="#g21" y="4284"/><use xlink:href="#g23" y="4301"/><use xlink:href="#g24" y="4318"/><use xlink:href="#g25" y="4335"/><rect x="0" y="4352" width="8" height="17" class="foreground"/><use xlink:href="#g22" y="4352"/></g><g><use xlink:href="#g21" y="4488"/><use xlink:href="#g23" y="4505"/><use xlink:href="#g24" y="4522"/><use xlink:href="#g25" y="4539"/><rect x="216" y="4556" width="8" height="17" class="foreground"/><use xlink:href="#g1" y="4556"/></g><g><use xlink:href="#g21" y="4692"/><use xlink:href="#g23" y="4709"/><use xlink:href="#g24" y="4726"/><use xlink:href="#g25" y="4743"/><use xlink:href="#g26" y="4760"/><rect x="0" y="4777" width="8" height="17" class="foreground"/><use xlink:href="#g22" y="4777"/></g></g></svg>
+</svg>

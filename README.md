@@ -2,19 +2,32 @@
 
 This is a collection of utilities intended to make it easier to work with the [DITA Open Toolkit](https://www.dita-ot.org/).
 
-Although to be honest, there's only a single utility:
-
 * `ditaot_install.sh` - install (or reinstall) the latest version of the DITA Open Toolkit
+* `ditaot_save_preprocessing.pl` - save the results of each stage of `preprocess` or `preprocess2`
+
+All scripts begin with `ditaot_` so you can use shell autocompletion if you don't remember the exact name of a script in this collection.
 
 ## Getting Started
 
 You can run these utilities on a native linux machine, or on a Windows 10 machine that has Windows Subsystem for Linux (WSL) installed.
 
+### Prerequisites
+
+The `ditaot_install.sh` script is a simple Bash script that does not have any prerequisites.
+
+Before using the `ditaot_save_preprocessing.pl` script, you must install the following perl modules:
+
+```
+sudo apt update
+sudo apt install cpanminus
+sudo cpanm install URI::Encode XML::Twig utf8::all
+```
+
 ### Installing
 
 Download or clone the repository, then put its `bin/` directory in your search path.
 
-For example, in the default bash shell, add this line to your `~/.profile` file:
+For example, in the default Bash shell, add this line to your `~/.profile` file:
 
 ```
 PATH=~/DITA-ditaot-utilities/bin:$PATH
@@ -22,7 +35,7 @@ PATH=~/DITA-ditaot-utilities/bin:$PATH
 
 ## ditaot_install.sh
 
-This is a bash script that checks the DITA-OT website for the latest version, then installs it:
+This is a Bash script that checks the DITA-OT website for the latest version, then installs it:
 
 ![fresh installation](svg/ditaot_install_new.svg)
 
@@ -55,6 +68,55 @@ export DITAOT_PLUGINS_TO_INSTALL="\
 ```
 
 When this variable is defined, the script creates filesystem links to them in the `~/dita-ot-<VERSION>/plugins` directory, then runs `dita install` to install them.
+
+## ditaot_save_preprocessing.pl
+
+This is a Perl script that adds instrumentation to your DITA-OT installation to save the results of each stage of `preprocess` or `preprocess2`.
+
+The usage is as follows:
+
+```
+chrispy@laptop:~$ ditaot_save_preprocessing.pl --help
+Usage:
+      [--pipeline preprocess | preprocess2]
+           Specifies which preprocessing pipeline to modify (default is 'preprocess')
+      [--add]
+           Add preprocess copy operations to the build_<pipeline>.xml file
+      [--remove]
+           Remove preprocess copy operations from the build_<pipeline>.xml file
+      [--dita /path/to/bin/dita]
+           Specifies which DITA-OT installation to use (default is from 'dita' in search path)
+```
+
+To add the instrumentation, use the `--add` option:
+
+![adding instrumentation](svg/ditaot_save_preprocessing_add.svg)
+
+By default, the DITA-OT installation is determined from `dita` in your search path, but you can use `--dita` to specify a particular installation. You can specify the path to the DITA-OT root directory or the `dita` script.
+
+By default, the `preprocess` pipeline is instrumented. To instrument the `preprocess2` pipeline instead, use the `--pipeline preprocess2` option.
+
+The results of each preprocessing stage are saved to the same location as the regular DITA-OT temporary directory, but with a suffix that includes the stage name and its numeric index in the preprocessing sequence. The instrumentation always saves results, regardless of the value of the `clean.temp` parameter. The transformation prints messages to indicate where the results are saved. For example,
+
+![running transformation](svg/ditaot_save_preprocessing_transformation.svg)
+
+The numeric index allows you to use shell autocompletion to use the `diff -r` command to compare an earlier stage against subsequent stages to see when something happens. For example,
+
+```
+cd /tmp
+diff -r my_tmp_dir-4-debug-filter my_tmp_dir-5-<TAB>
+diff -r my_tmp_dir-4-debug-filter my_tmp_dir-6-<TAB>
+diff -r my_tmp_dir-4-debug-filter my_tmp_dir-7-<TAB>
+...
+```
+
+**Only files matching `*.dita*` are saved**. They are run through an XSLT transformation (defined within the `ditaot_save_preprocessing.pl` script itself) to remove superfluous attributes that can add clutter and complicate diffs. Feel free to modify the XSLT transformation as needed to suit your needs.
+
+To remove the instrumentation from your DITA-OT, use the `--remove` option:
+
+![removing instrumentation](svg/ditaot_save_preprocessing_remove.svg)
+
+(And don't forget to delete the extra saved directories when you no longer need them - they add up quickly!)
 
 ## Author
 
