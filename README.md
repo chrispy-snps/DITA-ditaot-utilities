@@ -1,10 +1,10 @@
 # DITA-ditaot-utilities
 
-This is a collection of utilities intended to make it easier to work with the DITA Open Toolkit.
+This is a collection of utilities intended to make it easier to work with the [DITA Open Toolkit](https://www.dita-ot.org/).
 
 Although to be honest, there's only a single utility:
 
-* `install_ditaot.sh` - install (or reinstall) the latest version of the DITA Open Toolkit
+* `ditaot_install.sh` - install (or reinstall) the latest version of the DITA Open Toolkit
 
 ## Getting Started
 
@@ -20,17 +20,15 @@ For example, in the default bash shell, add this line to your `~/.profile` file:
 PATH=~/DITA-ditaot-utilities/bin:$PATH
 ```
 
-## Usage
-
-### install_ditaot.sh
+## ditaot_install.sh
 
 This is a bash script that checks the DITA-OT website for the latest version, then installs it:
 
-![fresh installation](svg/install_ditaot_new.svg)
+![fresh installation](svg/ditaot_install_new.svg)
 
 If the latest version is already installed, the script asks if it should be reinstalled:
 
-![fresh installation](svg/install_ditaot_reinstall.svg)
+![reinstallation](svg/ditaot_install_reinstall.svg)
 
 This reinstallation can be useful if you've modified the DITA-OT to run experiments.
 
@@ -44,10 +42,12 @@ In addition, a version-independent filesystem link is created at
 
 so that you can put `~/dita-ot` in your `$PATH` and always get the latest version.
 
-If you have DITA-OT plugins to be installed, add the following to your `~/.profile` file to specify the list of plugins to install (exact syntax is important so that the entries are linefeed-separated):
+### Automatically Installing Plugins
+
+If you have DITA-OT plugins to be installed, add the following to your `~/.profile` file to specify the list of plugins to install (exact syntax is important so that the entries are linefeed-separated-only, with no indenting):
 
 ```
-# DITA-OT plugins for the install_ditaot.sh script to install
+# DITA-OT plugins for the ditaot_install.sh script to install
 export DITAOT_PLUGINS_TO_INSTALL="\
 /path/to/com.my.plugin1
 /path/to/com.my.plugin2
