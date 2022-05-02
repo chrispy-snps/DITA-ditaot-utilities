@@ -1,6 +1,7 @@
 #!/usr/bin/perl
 use warnings;
 use strict;
+use v5.10;  # for "state" and "//" features
 use File::Copy;
 use File::Spec;
 use Getopt::Long 'HelpMessage';
@@ -37,16 +38,11 @@ if (!defined($dita)) {
  die "cannot find 'dita' in search path (use --dita to specify DITA-OT location)" if $dita eq '';
 }
 
-# find where the build*.xml file lives
+# find where the DITA-OT directory is
 $dita = File::Spec->rel2abs($dita);  # get absolute path (can be <DITA-OT> or <DITA-OT>/bin/dita)
 my $dita_dir = ($dita =~ s!\/(bin/.*)?$!!rs) or die "could not get DITA-OT root directory";  # remove trailing slash, 'bin/*'
 die "could not find '$dita_dir'" if !-d $dita_dir;
 print "Using the DITA-OT installation at '$dita_dir'.\n";
-my $buildfile = "$dita_dir/plugins/org.dita.base/build_${pipeline}.xml";
-die "could not find '$buildfile'" if !-f $buildfile;
-
-# this is where the original build*.xml file is saved
-my $orig_buildfile = "${buildfile}.orig";
 
 # this is the XSLT used to simplify .dita* files
 my $xslt_file = "$dita_dir/plugins/org.dita.base/clean.xsl";
@@ -97,70 +93,103 @@ my $XSLT = <<'EOS';
 </xsl:stylesheet>
 EOS
 
-if ($add) {
- # make a backup copy of the build*.xml file, if it doesn't already exist
- if (!-f $orig_buildfile) {
-  File::Copy::copy($buildfile, $orig_buildfile);
-  print "Copied '$buildfile'\n    to '$orig_buildfile'.\n\n";
+# these are the build files to process
+my @build_files = (
+ "$dita_dir/plugins/org.dita.base/build_preprocess.xml",
+ "$dita_dir/plugins/org.dita.base/build_preprocess2.xml"
+);
+
+# if we're removing the modifications, do it and exit here
+if ($remove) {
+ # restore original build* files
+ foreach my $build_file (@build_files) {
+  my $orig_build_file = "${build_file}.orig";
+  if (-f $orig_build_file) {
+   print "Restored '$orig_build_file'\n      to '$build_file'.\n";
+   File::Copy::copy($orig_build_file, $build_file);
+   unlink($orig_build_file);
+   unlink($xslt_file);
+  }
  }
+ exit;
+}
 
- # read the build*.xml file
- my $twig = XML::Twig->new(
-  twig_handlers => {
-  })->parsefile($orig_buildfile);
+# we're modifying the files, so read them in
+my %build_twigs = ();
+my %target_elts = ();
+{
+ foreach my $this_build_file (@build_files) {
+  # this is where the original build*.xml file is saved
+  my $orig_build_file = "${this_build_file}.orig";
 
- # get the list of sub-targets called by the top-level target
- my $pipeline_elt = $twig->first_elt("target[\@name = '$pipeline']") or die "could not find <target name='$pipeline'> in '$buildfile'";
- my @depends = split(m![,\s]+!, $pipeline_elt->att('depends'));
+  # make a backup copy of the build file, if it doesn't already exist
+  if (!-f $orig_build_file) {
+   File::Copy::copy($this_build_file, $orig_build_file);
+   print "Copied '$this_build_file'\n    to '$orig_build_file'.\n\n";
+  }
 
- # add our modifications at end of each sub-target <target> element
- my $idx = 1;
- foreach my $subtarget (@depends) {
-  my $sub_target_elt = $twig->first_elt("target[\@name = '$subtarget']") or next;  # skip to next if we can't find it
-  my $dest_dir = sprintf('${dita.temp.dir}-%d-%s', $idx++, $subtarget);
+  my $this_twig = $build_twigs{$this_build_file} = XML::Twig->new(
+   twig_handlers => {
+    'target[@name]' => sub { $target_elts{$_->att('name')} = $_; return 1; },
+   })->parsefile($orig_build_file);
+  $this_twig->root->set_att('#file', $this_build_file);
+ }
+}
+
+# this subroutine modifies a target to save temporary files, if needed
+sub process_target {
+ state $idx = 1;
+ my $this_target = shift;
+ my $target_elt = $target_elts{$this_target} or return;
+
+ # recurse into dependency targets first
+ process_target($_) for split(m!\s*,\s*!, $target_elt->att('depends') // '');
+
+ # now process this target
+ if ($target_elt->first_child('pipeline')) {
+  my $dest_dir = sprintf('${dita.temp.dir}-%02d-%s', $idx++, $this_target);
 
   # print a helpful message during DITA-OT transformation
-  $sub_target_elt->insert_new_elt(last_child => 'echo', "Copying temporary files to '$dest_dir'.");
+  $target_elt->insert_new_elt(last_child => 'echo', "Copying temporary files to '$dest_dir'.");
 
   # do a straight <copy> of everything with no modification
   if (0) {
-   $sub_target_elt
+   $target_elt
     ->insert_new_elt(last_child => 'copy', {todir => $dest_dir})
     ->insert_new_elt(last_child => 'fileset', {dir => '${dita.temp.dir}'});
   }
 
   # use <xslt> to simpify files
   if (1) {
-   $sub_target_elt
+   $target_elt
     ->insert_new_elt(last_child => 'xslt', {style => $xslt_file, basedir => '${dita.temp.dir}', destdir => $dest_dir, includes => '**/*.dita*'})
     ->insert_new_elt(last_child => 'mapper', {type => 'identity'});
   }
 
-  print "  '$subtarget' will save results in '$dest_dir'.\n";
- }
+  # set a marker that we need to write this build file out
+  $target_elt->root->set_att('#modified', 1);
 
- $twig->print_to_file($buildfile, pretty_print => 'indented');
- print "Wrote modifications to '$buildfile'.\n";
-
- # write out our XSLT file
- write_entire_file($xslt_file, $XSLT);
- print "Wrote simplification XSLT to '$xslt_file'.\n";
-
-} elsif ($remove) {
- # restore original build* file
- if (-f $orig_buildfile) {
-  print "Restored '$orig_buildfile'\n      to '$buildfile'.\n";
-  File::Copy::copy($orig_buildfile, $buildfile);
-  unlink($orig_buildfile);
-  unlink($xslt_file);
- } else {
-  print "Error: No DITA-OT modifications installed.\n";
-  exit 1;
+  print "  '$this_target' will save results in '$dest_dir'.\n";
  }
 }
 
-exit;
+# modify the processing pipeline of interest
+process_target($pipeline);  # this will recurse into dependency targets as needed
 
+# write out modified build files
+foreach my $build_file (@build_files) {
+ my $this_twig = $build_twigs{$build_file};
+ next if !defined($this_twig->root->att('#modified'));
+
+ # write out modified build file
+ $this_twig->print_to_file($build_file, pretty_print => 'indented');
+ print "Wrote modifications to '$build_file'.\n";
+}
+
+# write out our XSLT file
+write_entire_file($xslt_file, $XSLT);
+print "Wrote simplification XSLT to '$xslt_file'.\n";
+exit;
 
 
 
