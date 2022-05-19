@@ -1,18 +1,18 @@
 #!/bin/bash
 
 # find latest DITA-OT version
-LATEST_DITAOT_URL=$(curl -s https://www.dita-ot.org/download | egrep -o "https://github.com/.*?zip")
+LATEST_DITAOT_URL=$(curl --insecure -s https://www.dita-ot.org/download | egrep -o "https://github.com/.*?zip")
 if [[ ! $LATEST_DITAOT_URL =~ ^https.*zip$ ]]
 then
   echo "Could not find latest .zip archive at 'https://www.dita-ot.org/download'."
-  exit
+  exit 1
 fi
 
 LATEST_DITAOT_VER=$(echo $LATEST_DITAOT_URL | grep -oP 'dita-ot-[^/]+(?=\.zip)')
 if [[ ! $LATEST_DITAOT_VER =~ ^dita-ot-[0-9\.]+$ ]]
 then
   echo "Could not extract version from '$LATEST_DITAOT_URL'."
-  exit
+  exit 1
 fi
 
 # check if it's already installed
@@ -33,7 +33,14 @@ fi
 echo -e "Downloading '$LATEST_DITAOT_URL'...\n"
 rm -f "${LATEST_DITAOT_VER}.zip"
 rm -f "${LATEST_DITAOT_VER}.zip.*"
-wget "$LATEST_DITAOT_URL" -q --show-progress
+wget "$LATEST_DITAOT_URL" --no-check-certificate -q --show-progress
+
+# make sure we got the archive
+if [ ! -f "${LATEST_DITAOT_VER}.zip" ]; then
+    echo "'${LATEST_DITAOT_VER}.zip' could not be downloaded using the following command:"
+    echo "  wget \"$LATEST_DITAOT_URL\" --no-check-certificate --show-progress"
+    exit 1
+fi
 
 # uncompress and create filesystem link
 echo -e "\nExtracting..."
