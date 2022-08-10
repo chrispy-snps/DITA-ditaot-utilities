@@ -119,6 +119,10 @@ Usage:
 
 When directories are specified, all `.ditamap` and `.dita` files in the specified directories are validated.
 
+For example,
+
+![validating files](svg/ditaot_validate.svg)
+
 The files must use a RelaxNG schema, declared using `<?xml-model ...?>` at the top of the file. For example,
 
 ```
