@@ -136,7 +136,12 @@ The files must use a RelaxNG schema, declared using `<?xml-model ...?>` at the t
 </topic>
 ```
 
-**Note:** Currently, `jing` crashes when validating DITA grammars that include the `svg-d` domain. I am not sure how to resolve this yet.
+**Note:** Currently, `jing` crashes when validating DITA grammars that include the `svg-d` domain due to [jing-trang issue #225](https://github.com/relaxng/jing-trang/issues/225). To work around this bug, you can modify your local DITA-OT installation as follows:
+
+   ```
+   sed -i 's/<!DOCTYPE .*>//' /path-to-dita-ot/plugins/org.oasis-open.dita.v1_3/rng/technicalContent/rng/svg/svg11/*.rng
+   sed -i 's/<!DOCTYPE .*>//' /path-to-dita-ot/plugins/org.oasis-open.dita.techcomm.v2_0/rng/technicalContent/svg/svg11/*.rng
+   ```
 
 By default, the DITA grammars are obtained from the DITA-OT installation determined from `dita` in your search path, but you can use `--dita` to specify a particular installation. You can specify the path to the DITA-OT root directory or the `dita` script. The DITA-OT installation only provides the grammar schemas; it is not used to perform the validation.
 
