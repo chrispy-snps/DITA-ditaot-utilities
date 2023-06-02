@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# change to our installation directory
+cd ${1-~/}  # default to ~/ if no directory is specified
+if [ $? -ne 0 ]; then
+  echo "Could not find installation directory '$1'."
+  exit 1
+fi
+
 # find latest DITA-OT version
 LATEST_DITAOT_URL=$(curl --insecure -s https://www.dita-ot.org/download | egrep -o "https://github.com/.*?zip")
 if [[ ! $LATEST_DITAOT_URL =~ ^https.*zip$ ]]
@@ -16,7 +23,6 @@ then
 fi
 
 # check if it's already installed
-cd ~
 if [ -d "$LATEST_DITAOT_VER" ] 
 then
   while true; do

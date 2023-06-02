@@ -77,6 +77,16 @@ In addition, a version-independent filesystem link is created at
 
 so that you can put `~/dita-ot` in your `$PATH` and always get the latest version.
 
+### Specifying an Installation Location
+
+If you specify a directory path argument, the DITA-OT installation and its version-independent link are created in that directory.
+
+For example, you can specify `.` to install the DITA-OT in the current directory:
+
+```
+ditaot_install.sh .
+```
+
 ### Automatically Installing Plugins
 
 If you have DITA-OT plugins to be installed, add the following to your `~/.profile` file to specify the list of plugins to install (exact syntax is important so that the entries are linefeed-separated-only, with no indenting):
